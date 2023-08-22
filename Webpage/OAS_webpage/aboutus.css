@@ -7,7 +7,7 @@
 }
 
 header{
-    background-image: url("https://images.pond5.com/dna-background-090161291_prevstill.jpeg");
+    background-image: url("images/image.jpg");
     background-position-y: -30rem;
     background-repeat: no-repeat;
     background-size: cover;
@@ -17,7 +17,7 @@ header{
     color: white;
 }
 
-.bg{
+.bg{ 
     backdrop-filter: blur(3px);
     padding: 1px;
 }
