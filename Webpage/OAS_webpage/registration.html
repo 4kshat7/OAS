@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        .body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --col: rgb(0, 208, 139);
+        }
+        
+        nav {
+            padding: 0 1.1rem;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            position: fixed;
+            width: 100%;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: gray;
+            padding: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .signup-logo:before {
+            content: "\e008";
+        }
+
+        .login-logo {
+            margin-right: 5px;
+            position: relative;
+            top: 1px;
+            display: inline-block;
+            font-family: "Glyphicons Halflings";
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .left,
+        .right,
+        .links {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        h1 {
+            letter-spacing: 1px;
+            font-size: 2.2rem;
+        }
+
+        .reg {
+            margin-top: 6rem;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            text-align: center;
+            font-weight: bolder;
+            width: 45%;
+            border-radius: 30px;
+            box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 50px 0 rgba(0, 0, 0, 0.10);
+        }
+
+        .reg h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--col);
+        }   
+
+        input {
+            margin: 14px 10px;
+            width: 70%;
+            padding: 10px;
+            border: none;
+            border-radius: 40px;
+            font-weight: bolder;
+            font-size: 15px;
+            box-shadow: 0 4px 8px 0 rgba(0, 208, 139, 0.2), 0 6px 20px 0 rgba(0, 208, 139, 0.19);
+        }
+
+        /* .btns{
+            width: 70%;
+            display: flex;
+            justify-content: space-between;
+        } */
+        input[type=submit],
+        input[type=reset] {
+            background-color: var(--col);
+            width: 33%;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            margin-top: 1.2rem;
+            /* width: 21%; */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="">
+        <ul class="right">
+            <li><a href="userlogin.html">
+                    <!-- <p class="signup-logo"></p> -->
+                    <img class="login-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs5mQ6ay0VmhqEMvRcf_M0cp_Fcc-yuhZ89aLn7TK5gu2xlNzpp3_iotZRTzAYxgTWyEo&usqp=CAU" width="21px" alt="">
+                    Login
+                </a></li>
+        </ul>
+    </nav>
+    <div class="body">
+        <div class="reg">
+            <h1>Registration</h1><br>
+            <form name="regfrm" action="reg_db.php" onsubmit="return validateForm()" method="post">
+                <input type="text" name="fname" placeholder="Enter First Name"><br>
+                <input type="text" name="lname" placeholder="Enter Last Name"><br>
+                <input type="text" name="place" placeholder="Enter Hospital/Institute Name and state"><br>
+                <input type="text" name="uname" placeholder="Username"><br>
+                <input type="password" name="password" placeholder="Password"><br>
+                <input type="password" name="cpassword" placeholder="Re-Enter Password"><br>
+                <input type="submit" name="submit">
+                <input type="reset" name="reset">
+            </form>
+        </div>
+    </div>
+    <script>
+        function validateForm() {
+            let f = document.forms["regfrm"]["fname"].value;
+            let l = document.forms["regfrm"]["lname"].value;
+            let place = document.forms["regfrm"]["place"].value;
+            let uname = document.forms["regfrm"]["uname"].value;
+            let pswd = document.forms["regfrm"]["password"].value;
+            let cpswd = document.forms["regfrm"]["cpassword"].value;
+            if (f == "") {
+                alert("Please Enter First Name");
+                return false;
+            }
+            if (l == "") {
+                alert("Please Enter Last Name");
+                return false;
+            }
+            if (place == "") {
+                alert("Please Enter Place");
+                return false;
+            }
+            if (uname == "") {
+                alert("Please Enter Username");
+                return false;
+            }
+            if (pswd == "") {
+                alert("Please Enter Password");
+                return false;
+            }
+            if(pswd.length < 6){
+                alert("Password Must be greater than 6 character");
+                return false;
+            }
+            if (cpswd == "") {
+                alert("Please Confirm Passsword");
+                return false;
+            }
+            if (cpswd != pswd) {
+                alert("Confirm Passsword must be same as Password");
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>

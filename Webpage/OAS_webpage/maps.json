@@ -1,0 +1,29 @@
+{
+  "type": "Maps",
+  "map": [
+    {
+      "text": "Chennai",
+      "size": 1.0,
+      "country": "India",
+      "city": "Chennai",
+      "lat": "13.08",
+      "lng": "80.24"
+    },
+    {
+      "text": "Vadodara",
+      "size": 1.0,
+      "country": "India",
+      "city": "Chennai",
+      "lat": "22.31",
+      "lng": "73.19"
+    },
+    {
+      "text": "Dubai",
+      "size": 1.0,
+      "country": "UAE",
+      "city": "Dubai",
+      "lat": "25.204",
+      "lng": "55.27"
+    }
+  ]
+}

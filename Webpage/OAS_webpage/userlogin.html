@@ -1,0 +1,223 @@
+<html>
+
+<head>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --col: rgb(0, 208, 139);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 800,
+                'GRAD' 0,
+                'opsz' 48
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 800,
+                'GRAD' 0,
+                'opsz' 48
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        nav {
+            padding: 0 1.1rem;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: gray;
+            padding: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .signup-logo:before {
+            content: "\e008";
+        }
+
+        .signup-logo {
+            position: relative;
+            top: 1px;
+            display: inline-block;
+            font-family: "Glyphicons Halflings";
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .left,
+        .right,
+        .links {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        input {
+            border: none;
+            /* box-shadow: 0 4px 8px 0 rgba(0, 208, 139, 0.2), 0 6px 20px 0 rgba(0, 208, 139, 0.19); */
+            /* border-radius: 40px;
+                margin: 8px;
+                padding: 8px;
+                width: 100%; */
+            font-weight: bolder;
+            font-size: 15px;
+        }
+
+        .input {
+            padding: 8px;
+            margin: 8px;
+        }
+
+        #login-btn {
+            margin: 20px 8px 0;
+        }
+
+        .input,
+        #login-btn {
+            box-shadow: 0 4px 8px 0 rgba(0, 208, 139, 0.2), 0 6px 20px 0 rgba(0, 208, 139, 0.19);
+            border-radius: 40px;
+            font-weight: bolder;
+            font-size: 15px;
+        }
+
+        input[type=submit] {
+            box-shadow: 0 4px 8px 0 rgba(0, 208, 139, 0.2), 0 6px 20px 0 rgba(0, 208, 139, 0.19);
+            border-radius: 40px;
+            background-color: var(--col);
+            color: white;
+            width: 100%;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 21px;
+            letter-spacing: 1px;
+        }
+
+        .login h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--col);
+            /* border-bottom: 3px solid var(--col); */
+        }
+
+        .login {
+            /* background-color: rgb(180, 150, 255); */
+            border-radius: 30px;
+            width: 25rem;
+            box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 50px 0 rgba(0, 0, 0, 0.10);
+            padding: 3% 3px 4% 3px;
+            margin-top: 10%;
+        }
+
+        .icon {
+            margin: 3px 5px;
+            color: var(--col);
+        }
+
+        .reg-link {
+            margin-top: 2rem;
+            font-size: .9rem;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: rgb(138, 138, 138);
+        }
+
+        .reg-link a {
+            color: var(--col);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="">
+        <ul class="right">
+            <li><a href="registration.html">
+                    <!-- <p class="signup-logo"></p> -->
+                    <img src="https://thumbs.dreamstime.com/b/user-icon-glyph-gray-background-106603565.jpg" width="21px" alt="">
+                    Sign Up
+                </a></li>
+        </ul>
+    </nav>
+    <center>
+        <form name="lgnfrm" action="login_db.php" onsubmit="return validateForm()" method="post">
+            <div class="login">
+                <h1><span>User Login</span></h1>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="input"><span class="material-symbols-outlined icon">
+                                    account_circle
+                                </span><input type="text" name="username" placeholder="Enter Username"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input"><span class="material-symbols-outlined icon">
+                                    key
+                                </span><input type="password" name="password" placeholder="Enter Password"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div id="login-btn">
+                                <input type="submit" name="login" value="Login">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <p class="reg-link">New User? Register <a href="registration.html">Here</a></p>
+            </div>
+        </form>
+    </center>
+    <script>
+        // console.log(sessionStorage.getItem("login"));
+        function validateForm() {
+            let x = document.forms["lgnfrm"]["username"].value;
+            let y = document.forms["lgnfrm"]["password"].value;
+            // console.log("x="+x);
+            sessionStorage.setItem("username", document.forms["lgnfrm"]["username"].value);
+            // console.log("u="+sessionStorage.getItem("username"));
+
+            if (x == "") {
+                alert("Please Enter Name");
+                return false;
+            }
+            if (y == "") {
+                alert("Please Enter Password");
+                return false;
+            }
+            if (y.length < 6) {
+                alert("Password Must be greater than 6 character");
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>
