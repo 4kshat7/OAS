@@ -254,13 +254,10 @@
   font-size: 1.8rem;
 }
 
-/* footer--------------------- */
-
 footer {
   width: 100%;
   color: black;
   background-color: rgb(255, 255, 255);
-  /* background-image: url("images/foot-bg.jpg"); */
   background-repeat: no-repeat;
   background-size: 100%;
   background-position-y: 33%;
@@ -288,7 +285,6 @@ footer h3 {
 }
 ul {
   list-style: none;
-  /* text-align: center; */
 }
 footer li {
   padding: 5px 10px;
@@ -318,7 +314,6 @@ footer .logo {
 }
 .bgc {
   padding: 5% 5% 1%;
-  /* backdrop-filter: blur(10px); */
 }
 .social-ic {
   text-align: center;

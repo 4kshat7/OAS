@@ -49,19 +49,12 @@
     background-image: url(./images/myBids2_bg.jpeg);
     padding: 5% 0;
     width: 100%;
-    /* background-color: rgb(200, 233, 255); */
-    /* background-color: rgb(227, 241, 255); */
+   
 }
-/* hr{
-    margin: 5% auto 2%;
-    border: 10px dotted purple;
-    border-bottom: none;
-    width: 10%;
-} */
+
 h3{
     margin: 4% auto;
     font-size: 5rem;
-    /* text-align: center; */
     padding-top: 5% 2% 5%;
     font-weight: bold;
     border-bottom: 3px solid rgb(30, 90, 221);
@@ -83,8 +76,7 @@ h3{
 .sec{
     width: 100%;
     background-color: #fff;
-    /* background-image: linear-gradient(rgb(255, 255, 255), rgb(208, 243, 255)); */
-    /* background-color: rgb(208, 243, 255); */
+
 }
 .details{
     padding: 0 0 2%;
@@ -146,7 +138,6 @@ footer{
     width: 100%;
     color: black;
     background-color: rgb(255, 255, 255);
-    /* background-image: url("images/foot-bg.jpg"); */
     background-repeat: no-repeat;
     background-size: 100%;
     background-position-y: 33%;
@@ -173,7 +164,6 @@ footer h4{
 }
 ul{
     list-style: none;
-    /* text-align: center; */
 }
 footer li{
     padding: 5px 10px;
@@ -203,7 +193,7 @@ footer .logo{
 }
 .bgc{
     padding: 5% 5% 1%;
-    /* backdrop-filter: blur(10px); */
+
 }
 .social-ic{
     text-align: center;
