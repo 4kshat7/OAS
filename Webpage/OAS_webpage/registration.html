@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Registration</title>
     <style>
-        body{
+             body{
             padding: 0;
             margin: 0;
         }
@@ -124,72 +125,102 @@
 </head>
 
 <body>
-    <nav class="">
+    <!-- Navigation Bar -->
+    <nav>
         <ul class="right">
             <li><a href="userlogin.html">
-                    <!-- <p class="signup-logo"></p> -->
-                    <img class="login-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs5mQ6ay0VmhqEMvRcf_M0cp_Fcc-yuhZ89aLn7TK5gu2xlNzpp3_iotZRTzAYxgTWyEo&usqp=CAU" width="21px" alt="">
-                    Login
+                    <img class="login-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs5mQ6ay0VmhqEMvRcf_M0cp_Fcc-yuhZ89aLn7TK5gu2xlNzpp3_iotZRTzAYxgTWyEo&usqp=CAU"
+                        width="21px" alt=""> Login
                 </a></li>
         </ul>
     </nav>
+
     <div class="body">
+        <!-- Registration Form -->
         <div class="reg">
-            <h1>Registration</h1><br>
+            <h1>Registration</h1>
             <form name="regfrm" action="reg_db.php" onsubmit="return validateForm()" method="post">
-                <input type="text" name="fname" placeholder="Enter First Name"><br>
-                <input type="text" name="lname" placeholder="Enter Last Name"><br>
-                <input type="text" name="place" placeholder="Enter Hospital/Institute Name and state"><br>
-                <input type="text" name="uname" placeholder="Username"><br>
-                <input type="password" name="password" placeholder="Password"><br>
+
+                
+                <!-- Full Name Input -->
+                <input type="text" name="fullname" placeholder="Enter Full Name"><br>
+
+                <!-- Email Input -->
+                <input type="email" name="email" placeholder="Enter Email"><br>
+
+                <!-- Password Input -->
+                <input type="password" name="pass" placeholder="Password"><br>
+
+                <!-- Confirm Password Input -->
                 <input type="password" name="cpassword" placeholder="Re-Enter Password"><br>
+
+                <!-- Submit and Reset Buttons -->
                 <input type="submit" name="submit">
                 <input type="reset" name="reset">
             </form>
         </div>
     </div>
+
     <script>
         function validateForm() {
-            let f = document.forms["regfrm"]["fname"].value;
-            let l = document.forms["regfrm"]["lname"].value;
-            let place = document.forms["regfrm"]["place"].value;
-            let uname = document.forms["regfrm"]["uname"].value;
-            let pswd = document.forms["regfrm"]["password"].value;
-            let cpswd = document.forms["regfrm"]["cpassword"].value;
-            if (f == "") {
-                alert("Please Enter First Name");
+            event.preventDefault(); // Prevent the form from submitting by default
+    
+            const fullName = document.forms["regfrm"]["fullname"].value;
+            const email = document.forms["regfrm"]["email"].value;
+            const pass = document.forms["regfrm"]["pass"].value;
+            const cpass = document.forms["regfrm"]["cpassword"].value;
+    
+            if (fullName === "") {
+                alert("Please Enter Full Name");
                 return false;
             }
-            if (l == "") {
-                alert("Please Enter Last Name");
+    
+            if (email === "") {
+                alert("Please Enter Email");
                 return false;
             }
-            if (place == "") {
-                alert("Please Enter Place");
-                return false;
-            }
-            if (uname == "") {
-                alert("Please Enter Username");
-                return false;
-            }
-            if (pswd == "") {
+    
+            if (pass === "") {
                 alert("Please Enter Password");
                 return false;
             }
-            if(pswd.length < 6){
-                alert("Password Must be greater than 6 character");
+    
+            if (pass.length < 6) {
+                alert("Password must be at least 6 characters long");
                 return false;
             }
-            if (cpswd == "") {
-                alert("Please Confirm Passsword");
+            
+            if (pass !== cpass) {
+                alert("Password and Confirm Password do not match");
                 return false;
             }
-            if (cpswd != pswd) {
-                alert("Confirm Passsword must be same as Password");
-                return false;
-            }
+    
+            // Create an object with the form data
+            const userData = {
+                name: fullName,
+                email: email,
+                pass: pass
+            };
+    
+            // Make a POST request using Axios
+            axios.post('http://localhost:3000/api/user/insertuser', userData)
+                .then(function (response) {
+                    // Handle the registration success here
+                    console.log("Registration successful:", response.data);
+    
+                    // Redirect to userLogin.html
+                    window.location.href = 'userLogin.html';
+                })
+                .catch(function (error) {
+                    // Handle registration errors here
+                    console.error("Registration failed:", error);
+    
+                    // Display an error message to the user if needed
+                    alert("Registration failed. Please try again.");
+                });
         }
     </script>
+    
 </body>
 
 </html>
