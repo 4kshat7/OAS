@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Auction Page</title>
     <style>
         body {
@@ -87,13 +88,54 @@
         .raise-bid-button:hover {
             background-color: #CC0000; /* Darker red on hover */
         }
+
+        .my-bids-link {
+    text-decoration: none;
+    position: absolute;
+    top: 20px; /* Adjust top position as needed */
+    left: 20px; /* Adjust left position as needed */
+}
+
+.my-bids-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffffff; /* White background */
+    border: none;
+    border-radius: 50px; /* Oval shape */
+    color: #000000; /* Black text */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.my-bids-button .arrow-icon {
+    display: inline-block;
+    margin-right: 10px; /* Add spacing between arrow and text */
+    font-size: 24px;
+    font-weight: bold; /* Make the arrow bolder */
+    line-height: 1; /* Adjust line-height to center the text vertically */
+}
+
+.my-bids-button:hover {
+    background-color: #000000; /* Black background on hover */
+    color: #FAF9F6; /* White text on hover */
+}
+
+
+
     </style>
 </head>
 <body>
+        <a href="myBids.html" class="my-bids-link">
+            <button class="my-bids-button">
+                <span class="arrow-icon">←</span> Back-To My Bids
+            </button>
+        </a>
+    
     <div class="container">
         
         <div class="bid-bar">
-            <div class="current-bid">Current Bid :  <span id="currentBid">0</span></div>
+            <div class="current-bid">Current Bid : INR   <span id="currentBid">0</span></div>
             <div class="bid-input-container">
                 <img src="images/rupees_icon.png" width="60px" height="60px">
                 <label for="bidAmount" class="bid-input-label">Bid Amount (INR):</label>
@@ -102,7 +144,7 @@
                 <div class="extra-bid">
                     <span class="extra-bid-arrow">↑</span>
                     <br>
-                    <span id="extraBidAmount"></span>
+                    <span id="extraBidAmount" class="extra-bid-amount"></span>
                     
                 </div>
             </div>
@@ -114,22 +156,51 @@
 
     <script>
         // JavaScript to handle bid functionality
-        document.getElementById("raiseBid").addEventListener("click", function() {
-            const bidInput = document.getElementById("bidAmount");
-            const currentBidValue = document.getElementById("currentBid");
-            const extraBidAmount = document.getElementById("extraBidAmount");
+            document.addEventListener("DOMContentLoaded", function () {
+        const raiseBidButton = document.getElementById("raiseBid");
+        const bidInput = document.getElementById("bidAmount");
+        const currentBidValue = document.getElementById("currentBid");
+        const extraBidAmountElement = document.getElementById("extraBidAmount");
 
-            const newBidAmount = parseInt(bidInput.value);
-            const currentBid = parseInt(currentBidValue.innerText);
+        // Get itemid and current bid value from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const itemid = urlParams.get("itemid");
+        let currentBid = parseFloat(urlParams.get("currentbid"));
+
+        // Set current bid value in the HTML
+        currentBidValue.innerText = currentBid.toLocaleString("en-IN");
+
+        raiseBidButton.addEventListener("click", function () {
+            const newBidAmount = parseFloat(bidInput.value);
 
             if (!isNaN(newBidAmount) && newBidAmount > currentBid) {
-                currentBidValue.innerText = newBidAmount.toLocaleString('en-IN');
-                extraBidAmount.innerText = `+${(newBidAmount - currentBid).toLocaleString('en-IN')}`;
-                bidInput.value = '';
+                const extraBidAmount = newBidAmount - currentBid;
+                currentBid = newBidAmount; // Update the current bid value
+                currentBidValue.innerText = newBidAmount.toLocaleString("en-IN");
+                bidInput.value = "";
+
+                // Update the extra bid amount next to the green arrow
+                extraBidAmountElement.innerText = `+${extraBidAmount.toLocaleString('en-IN')}`;
+
+                // Send a PATCH request using Axios
+                axios.patch("http://localhost:3000/api/item/updateItem", {
+                    itemid: itemid.toString(),
+                    basePrice: currentBid.toFixed(2)
+                })
+                .then(response => {
+                    console.log("Bid updated successfully:", response.data);
+                })
+                .catch(error => {
+                    console.error("Error updating bid:", error);
+                });
             } else {
-                alert('Bid amount must be greater than the current bid value.');
+                alert("Bid amount must be greater than the current bid value.");
             }
         });
+    });
+
     </script>
+    
+    
 </body>
 </html>

@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About System</title>
+    <title>My-Bids</title>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="myBids.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body>
@@ -35,7 +37,7 @@
                 <div class="abt-img"><img src="images/bid_tag.png" alt=""></div>
                 <h1 class="cnth1">List of your on-going Bids:</h1>
                 
-                <p class="abstract">hurry up raise the bid before it runs out!</p>
+                <p class="abstract">hurry up!! raise bid before it runs out!</p>
             </div>
         </div>
      
@@ -46,29 +48,34 @@
             <div class="cntnr">
 
                 <div class="container">
-                <div class="row">
+                <div id="product-list">
                     <!-- BEGIN PRODUCTS -->
-                    <div class="col-md-3 col-sm-6">
-                        <span class="thumbnail text-center" style="background-color: #292e33;">
-                            <img src="./images/product2.webp" alt="...">
-                            <h4 class="text-danger">Nintendo Switch</h4>
-                
-                            <p class="current-bid" style="color: greenyellow;">Current Bid:: INR 1520</p>
-                            <p style="color: darkgoldenrod;">Your bid:: INR 1125</p>
-                            <p>Auction End in 5 days</p>
-                
+                    <!-- <div id="product-list"> -->
+                    <!-- <div class="col-md-3 col-sm-6">
+                        <span class="thumbnail text-center" style="background-color: #292e33;"
+                            data-itemid="${item.itemid}"
+                            data-uploadedby="${item.uploadedBy}"
+                            data-baseprice="${item.basePrice}"
+                            data-uploadedon="${item.uploadedOn}"
+                            data-endtime="${item.endTime}"
+                            data-itemimgpath="${item.itemimgPath}"
+                            data-itemdescription="${item.itemDescription}">
+                            <img src="${item.itemimgPath}" alt="...">
+                            <h4 class="text-danger">${item.uploadedBy}</h4>
+                            <p class="current-bid" style="color: greenyellow;">Current Bid: INR ${item.basePrice}</p>
+                            <p>Auction End in ${calculateDaysLeft(item.endTime)} days</p>
                             <hr class="line">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <button type="button" class="btn btn-link">Withdraw Bidding</button>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
-                                  <a href="bidBox.html"><button class="btn btn-danger right"> RAISE BID</button></a>
+                                    <a href="bidBox.html"><button class="btn btn-danger right"> RAISE BID</button></a>
                                 </div>
-                
                             </div>
                         </span>
-                    </div>
+                    </div> -->
+                <!-- </div>
                 
                 
                 <div class="col-md-3 col-sm-6">
@@ -138,7 +145,7 @@
                 
                         </div>
                     </span>
-                </div>
+                </div> -->
 
                     <!-- END PRODUCTS -->
                 </div>
@@ -191,6 +198,80 @@
             <p>© 2023 Company, Inc. All rights reserved</p>
         </div>
     </footer>
+
+    <script>
+        // Function to fetch item details from the API and update the HTML
+        async function fetchItemDetailsAndRender() {
+            try {
+                console.log('Fetching item details...');
+
+                // Use Axios to make the GET request to the API endpoint
+                const response = await axios.get('http://localhost:3000/api/item/getitemdetails');
+                const data = response.data;
+
+                const productList = document.getElementById('product-list');
+
+                data.forEach(item => {
+                    const productElement = document.createElement('div');
+                    productElement.className = 'col-md-3 col-sm-6';
+                    productElement.innerHTML = `
+                        <span class="thumbnail text-center" style="background-color: #292e33;"
+                            data-itemid="${item.itemid}"
+                            data-uploadedby="${item.uploadedBy}"
+                            data-baseprice="${item.basePrice}"
+                            data-uploadedon="${item.uploadedOn}"
+                            data-endtime="${item.endTime}"
+                            data-itemimgpath="${item.itemimgPath}"
+                            data-itemdescription="${item.itemDescription}">
+                            <img src="${item.itemimgPath}" alt="...">
+                            <h4 class="text-danger">${item.uploadedBy}</h4>
+                            <p class="current-bid" style="color: greenyellow;">Current Bid: INR ${item.basePrice}</p>
+                            <p>Auction End in ${calculateDaysLeft(item.endTime)} days</p>
+                            <hr class="line">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <button type="button" class="btn btn-link" id="withdraw-btn">Withdraw Bidding</button>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <button class="btn btn-danger right" onclick="redirectToBidBox(this)"> RAISE BID</button>
+
+                                </div>
+                            </div>
+                        </span>
+                    `;
+            console.log('Item ID:', item.itemid);
+            console.log('Uploaded By:', item.uploadedBy);
+            console.log('Base Price:', item.basePrice);
+            console.log('Uploaded On:', item.uploadedOn);
+            console.log('End Time:', item.endTime);
+            console.log('Item Image Path:', item.itemimgPath);
+            console.log('Item Description:', item.itemDescription);
+
+                    productList.appendChild(productElement);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Function to calculate the number of days left
+        function calculateDaysLeft(endTime) {
+            const now = new Date();
+            const end = new Date(endTime);
+            const timeDiff = end - now;
+            const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            return daysLeft;
+        }
+        function redirectToBidBox(buttonElement) {
+        const productElement = buttonElement.closest('.thumbnail');
+        const itemid = productElement.getAttribute('data-itemid');
+        const currentbid = productElement.getAttribute('data-baseprice');
+        window.location.href = `bidBox.html?itemid=${itemid}&currentbid=${currentbid}`;
+    }
+
+        // Call the fetchItemDetailsAndRender function when the page loads
+        window.onload = fetchItemDetailsAndRender;
+    </script>
 
 </body>
 
