@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #292e33; /* Black background */
+        }
+
+        .container {
+            text-align: center;
+            background-color: #292e33; /* Grey container background */
+            width: 50%;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .bid-bar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bid-input-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .bid-input-label {
+            color: #fff; /* White text */
+            font-size: 20px;
+            margin-right: 10px; /* Add spacing between label and input */
+        }
+
+        .bid-input {
+            font-size: 24px;
+            padding: 10px;
+            border: none;
+            text-align: center;
+            background-color: #333; /* Darker input background */
+            color: #fff; /* White text */
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .current-bid {
+            color: yellow; /* Yellow text for current bid value */
+            font-size: 28px; /* Larger text for current bid value */
+            margin-bottom: 10px; /* Add spacing between elements */
+        }
+
+        .extra-bid {
+            color: green; /* Green text for extra bid amount */
+            font-size: 28px; /* Larger font size */
+            font-weight: bold; /* Bolder text */
+            /* position: absolute; */
+            right: 10px; /* Position on the right side */
+        }
+
+        .extra-bid-arrow {
+            color: green; /* Green up arrow */
+            font-size: 30px;
+            position: relative;
+            margin-left: 10px; /* Add spacing between amount and arrow */
+        }
+
+        .raise-bid-button {
+            background-color: #FF0000; /* Red background */
+            color: #FFFFFF; /* White text */
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .raise-bid-button:hover {
+            background-color: #CC0000; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="bid-bar">
+            <div class="current-bid">Current Bid :  <span id="currentBid">0</span></div>
+            <div class="bid-input-container">
+                <img src="images/rupees_icon.png" width="60px" height="60px">
+                <label for="bidAmount" class="bid-input-label">Bid Amount (INR):</label>
+                <input type="number" id="bidAmount" class="bid-input" placeholder="">
+                <br />
+                <div class="extra-bid">
+                    <span class="extra-bid-arrow">↑</span>
+                    <br>
+                    <span id="extraBidAmount"></span>
+                    
+                </div>
+            </div>
+            <br /><br />
+            <button id="raiseBid" class="raise-bid-button">Raise Bid</button>
+            
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle bid functionality
+        document.getElementById("raiseBid").addEventListener("click", function() {
+            const bidInput = document.getElementById("bidAmount");
+            const currentBidValue = document.getElementById("currentBid");
+            const extraBidAmount = document.getElementById("extraBidAmount");
+
+            const newBidAmount = parseInt(bidInput.value);
+            const currentBid = parseInt(currentBidValue.innerText);
+
+            if (!isNaN(newBidAmount) && newBidAmount > currentBid) {
+                currentBidValue.innerText = newBidAmount.toLocaleString('en-IN');
+                extraBidAmount.innerText = `+${(newBidAmount - currentBid).toLocaleString('en-IN')}`;
+                bidInput.value = '';
+            } else {
+                alert('Bid amount must be greater than the current bid value.');
+            }
+        });
+    </script>
+</body>
+</html>
