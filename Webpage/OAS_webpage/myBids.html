@@ -49,6 +49,7 @@
 
                 <div class="container">
                 <div id="product-list">
+                    
                     <!-- BEGIN PRODUCTS -->
                     <!-- <div id="product-list"> -->
                     <!-- <div class="col-md-3 col-sm-6">
@@ -223,7 +224,7 @@
                             data-endtime="${item.endTime}"
                             data-itemimgpath="${item.itemimgPath}"
                             data-itemdescription="${item.itemDescription}">
-                            <img src="${item.itemimgPath}" alt="...">
+                            <img src="${item.itemimgPath}" alt="image not found" width="400px" height="50px">
                             <h4 class="text-danger">${item.uploadedBy}</h4>
                             <p class="current-bid" style="color: greenyellow;">Current Bid: INR ${item.basePrice}</p>
                             <p>Auction End in ${calculateDaysLeft(item.endTime)} days</p>
@@ -239,13 +240,13 @@
                             </div>
                         </span>
                     `;
-            console.log('Item ID:', item.itemid);
-            console.log('Uploaded By:', item.uploadedBy);
-            console.log('Base Price:', item.basePrice);
-            console.log('Uploaded On:', item.uploadedOn);
-            console.log('End Time:', item.endTime);
-            console.log('Item Image Path:', item.itemimgPath);
-            console.log('Item Description:', item.itemDescription);
+            // console.log('Item ID:', item.itemid);
+            // console.log('Uploaded By:', item.uploadedBy);
+            // console.log('Base Price:', item.basePrice);
+            // console.log('Uploaded On:', item.uploadedOn);
+            // console.log('End Time:', item.endTime);
+            // console.log('Item Image Path:', item.itemimgPath);
+            // console.log('Item Description:', item.itemDescription);
 
                     productList.appendChild(productElement);
                 });
@@ -253,6 +254,47 @@
                 console.error('Error fetching data:', error);
             }
         }
+
+        async function withdrawBid(itemid) {
+        try {
+            console.log('Withdrawing bid for item ID:', itemid);
+
+            // Create a JSON object with the itemid
+            const requestData = {
+                itemid: itemid
+            };
+
+            // Use Axios to send a DELETE request to the API endpoint
+            const response = await axios.delete('http://localhost:3000/api/item/deleteitem', {
+                data: requestData, // Use the data option to send the JSON body
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status === 200) {
+                console.log('Bid withdrawn successfully');
+                window.location.reload();
+            } else {
+                console.error('Bid withdrawal failed');
+                // Handle the error as needed
+            }
+        } catch (error) {
+            console.error('Error withdrawing bid:', error);
+        }
+    }
+
+    // Add an event listener to the document and use event delegation
+    document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target && target.id === 'withdraw-btn') {
+            const productElement = target.closest('.thumbnail');
+            if (productElement) {
+                const itemid = productElement.getAttribute('data-itemid');
+                withdrawBid(itemid);
+            }
+        }
+    });
 
         // Function to calculate the number of days left
         function calculateDaysLeft(endTime) {
@@ -268,7 +310,7 @@
         const currentbid = productElement.getAttribute('data-baseprice');
         window.location.href = `bidBox.html?itemid=${itemid}&currentbid=${currentbid}`;
     }
-
+    
         // Call the fetchItemDetailsAndRender function when the page loads
         window.onload = fetchItemDetailsAndRender;
     </script>

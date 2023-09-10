@@ -44,13 +44,26 @@
     margin: 7px;
     border-radius: 50%;
 
-}
+}   
 .middle{
     background-image: url(./images/myBids2_bg.jpeg);
+    background-size: contain;
     padding: 5% 0;
     width: 100%;
    
 }
+
+/* .container{
+    display: flex;
+}
+.product-list{
+    display: flex;
+  }
+
+.cntnr{
+    display: flex;
+    padding: 3% 7%;
+} */
 
 h3{
     margin: 4% auto;
@@ -69,10 +82,7 @@ h3{
     width: 40%;
 
 }
-.cntnr{
-    display: flex;
-    padding: 3% 7%;
-}
+
 .sec{
     width: 100%;
     background-color: #fff;

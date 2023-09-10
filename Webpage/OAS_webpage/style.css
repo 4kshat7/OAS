@@ -47,6 +47,7 @@
   width: 79%;
   height: 52vh;
 }
+
 .intro .cards {
   background-color: antiquewhite;
 }
@@ -130,7 +131,7 @@
 .a-btn {
   padding-left: 30px;
 }
-.cnf-btn {
+.f-btn {
   height: 6rem;
   border-radius: 50px;
   padding: 0 5%;
