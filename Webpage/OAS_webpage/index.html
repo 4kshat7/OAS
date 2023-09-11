@@ -56,7 +56,7 @@
         // Gen random data
         const N = 20;
         const arcsData = [...Array(N).keys()].map(() => ({
-          // startLat: (Math.random() - 0.5) * 180,
+       
           startLat:22.31,
           startLng:73.19,
           endLat: (Math.random() - 0.5) * 180,
@@ -65,7 +65,7 @@
         }));
     
         const labellData = [...Array(N).keys()].map(() => ({
-          // startLat: (Math.random() - 0.5) * 180,
+      
           lat:22.31,
           lng:73.19,
           Name1:"Parul University",
@@ -368,7 +368,7 @@
               </div>
               <!-- Carousel controls -->
               <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                <!-- <i class="fa fa-angle-left"></i> -->
+               
                 <i style="font-family:fantasy;">&lt;</i>
               </a>
               <a class="carousel-control-next" href="#myCarousel" data-slide="next">
@@ -386,22 +386,10 @@
   <!-- highlights   -->
 
   <section class="highlights">
-    <!-- <hr> -->
+
     <h1 class="heads">Our Highlights</h1>
     <hr width="60%">
-    <!-- <div class="points">
-      <div class="p1">
-        <h4 class="topic">Current users</h4>
-        <p class="nos">14</p>
-        <p class="h-desc">Users who found this project helpful.</p>
-      </div>
-
-      <div class="p2">
-        <h4 class="topic">Total Rating</h4>
-        <p class="nos">10</p>
-        <p class="h-desc">Users who found the Projects Design extremly user-friendly</p>
-      </div>
-    </div> -->
+   
     <div class="heading d-flex justify-content-center align-items-center">
       <ul class="social-icons">
           
@@ -453,21 +441,21 @@
 
   <script>
     function placeBid(itemName, basePrice, itemimgPath) {
-      // Get the current date and time in the desired format (e.g., "2021-05-11 22:23:00")
       const currentDate = new Date();
       const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
   
-      // Create an object with item data
+
+      const randomNumber = Math.floor(Math.random() * 10) + 1;
       const newItem = {
         uploadedBy: itemName,
         basePrice: basePrice,
         uploadedOn: formattedDate,
-        endTime: "2023-09-12 20:20:00", // Set your desired end time
+        endTime: "2023-09-30 20:20:00", 
         itemimgPath: itemimgPath,
-        itemDescription: `1 Year used ${itemName}, still in good condition`,
+        itemDescription: `${randomNumber} years used ${itemName}, still in good condition`,
       };
   
-      // Send a GET request to check if the item already exists
+   
       axios
         .get("http://localhost:3000/api/item/getitemdetails")
         .then((response) => {
@@ -476,23 +464,23 @@
           if (itemExists) {
             alert("You are already bidding for this item!");
           } else {
-            // Item does not exist, proceed to add it
+           
             axios
               .post("http://localhost:3000/api/item/insertitem", newItem)
               .then((response) => {
                 console.log("Item added successfully:", response.data);
                 window.location.href = './myBids.html';
-                // You can perform additional actions here if needed
+               
               })
               .catch((error) => {
                 console.error("Error adding item:", error);
-                // Handle the error here
+            
               });
           }
         })
         .catch((error) => {
           console.error("Error checking item existence:", error);
-          // Handle the error here
+          
         });
     }
   </script>

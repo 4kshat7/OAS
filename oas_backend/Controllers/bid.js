@@ -17,7 +17,7 @@ const getBidDetails = async (req, res) => {
       bidTime
     );
 
-    // const result = await queries.CRUD_USER_MASTER('R', null, null, null, null, null, null, null);
+
 
     if (result) {
       res.status(200).json(result);
@@ -34,10 +34,9 @@ const insertBid = async (req, res) => {
     const bidTime = req.body.bidTime;
 
   try {
-    // const result = await queries.CRUD_USER_MASTER(action, userid, email, name, phone, eid, address, pass);
+
     const result = await queries.CRUD_BID_MASTER("C", itemid, userid,price, bidTime);
 
-    // const result = await queries.CRUD_USER_MASTER('R', null, null, null, null, null, null, null);
 
     if (result) {
       res.status(200).json(result);
@@ -54,13 +53,12 @@ const updateBid = async (req, res) => {
   const bidTime = req.body.bidTIme ? req.body.bidTime : null;
 
   try {
-    // const result = await queries.CRUD_USER_MASTER(action, userid, email, name, phone, eid, address, pass);
+
     const result = await queries.CRUD_BID_MASTER(
       "U",
       itemid, userid,price, bidTime
     );
 
-    // const result = await queries.CRUD_USER_MASTER('R', null, null, null, null, null, null, null);
 
     if (result) {
       res.status(200).json(result);
@@ -75,7 +73,6 @@ const deleteBid = async (req, res) => {
   const userid = req.body.userid;
 
   try {
-    // const result = await queries.CRUD_USER_MASTER(action, userid, email, name, phone, eid, address, pass);
     const result = await queries.CRUD_BID_MASTER(
       "D",
       itemid,
@@ -83,8 +80,6 @@ const deleteBid = async (req, res) => {
       null,
       null
     );
-
-    // const result = await queries.CRUD_USER_MASTER('R', null, null, null, null, null, null, null);
 
     if (result) {
       res.status(200).json(result);

@@ -5,7 +5,6 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     
 
@@ -85,11 +84,7 @@
 
         input {
             border: none;
-            /* box-shadow: 0 4px 8px 0 rgba(0, 208, 139, 0.2), 0 6px 20px 0 rgba(0, 208, 139, 0.19); */
-            /* border-radius: 40px;
-                margin: 8px;
-                padding: 8px;
-                width: 100%; */
+
             font-weight: bolder;
             font-size: 15px;
         }
@@ -126,11 +121,11 @@
         .login h1 {
             font-family: Arial, Helvetica, sans-serif;
             color: var(--col);
-            /* border-bottom: 3px solid var(--col); */
+     
         }
 
         .login {
-            /* background-color: rgb(180, 150, 255); */
+  
             border-radius: 30px;
             width: 25rem;
             box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 50px 0 rgba(0, 0, 0, 0.10);
@@ -161,7 +156,7 @@
     <nav class="">
         <ul class="right">
             <li><a href="registration.html">
-                    <!-- <p class="signup-logo"></p> -->
+                 
                     <img src="https://thumbs.dreamstime.com/b/user-icon-glyph-gray-background-106603565.jpg" width="21px" alt="">
                     Sign Up
                 </a></li>
@@ -200,7 +195,7 @@
     </center>
     <script>
         function validateForm(event) {
-            event.preventDefault(); // Prevent the form from submitting by default
+            event.preventDefault(); 
             
             const email = document.forms["lgnfrm"]["email"].value;
             const password = document.forms["lgnfrm"]["password"].value;
@@ -210,12 +205,10 @@
                 return false;
             }
     
-            // Make a GET request to fetch user details
             axios.get('http://localhost:3000/api/user/getuserdetails')
                 .then(function (response) {
                     const users = response.data;
     
-                    // Find the user with a matching email
                     const user = users.find((user) => user.email === email);
     
                     if (!user) {
@@ -223,17 +216,14 @@
                         return;
                     }
     
-                    // Check if the provided password matches the user's password
                     if (user.password !== password) {
                         alert("Incorrect password. Please check your password.");
                         return;
                     }
-    
-                    // Authentication successful, redirect the user
                     window.location.href = 'index.html';
                 })
                 .catch(function (error) {
-                    // Handle errors if the GET request fails
+                 
                     console.error("Error fetching user details:", error);
                     alert("Authentication failed. Please try again later.");
                 });

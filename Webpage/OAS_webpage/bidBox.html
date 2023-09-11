@@ -12,12 +12,12 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #292e33; /* Black background */
+            background-color: #292e33; 
         }
 
         .container {
             text-align: center;
-            background-color: #292e33; /* Grey container background */
+            background-color: #292e33; 
             width: 50%;
             padding: 20px;
             border-radius: 10px;
@@ -37,9 +37,9 @@
         }
 
         .bid-input-label {
-            color: #fff; /* White text */
+            color: #fff; 
             font-size: 20px;
-            margin-right: 10px; /* Add spacing between label and input */
+            margin-right: 10px; 
         }
 
         .bid-input {
@@ -47,24 +47,23 @@
             padding: 10px;
             border: none;
             text-align: center;
-            background-color: #333; /* Darker input background */
-            color: #fff; /* White text */
+            background-color: #333; 
+            color: #fff; 
             border-radius: 5px;
             width: 100%;
         }
 
         .current-bid {
-            color: yellow; /* Yellow text for current bid value */
-            font-size: 28px; /* Larger text for current bid value */
-            margin-bottom: 10px; /* Add spacing between elements */
+            color: yellow; 
+            font-size: 28px; 
+            margin-bottom: 10px; 
         }
 
         .extra-bid {
-            color: green; /* Green text for extra bid amount */
-            font-size: 28px; /* Larger font size */
-            font-weight: bold; /* Bolder text */
-            /* position: absolute; */
-            right: 10px; /* Position on the right side */
+            color: green; 
+            font-size: 28px; 
+            font-weight: bold; 
+            right: 10px; 
         }
 
         .extra-bid-arrow {
@@ -101,8 +100,8 @@
     padding: 10px 20px;
     background-color: #ffffff; /* White background */
     border: none;
-    border-radius: 50px; /* Oval shape */
-    color: #000000; /* Black text */
+    border-radius: 50px; 
+    color: #000000;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -112,13 +111,13 @@
     display: inline-block;
     margin-right: 10px; /* Add spacing between arrow and text */
     font-size: 24px;
-    font-weight: bold; /* Make the arrow bolder */
-    line-height: 1; /* Adjust line-height to center the text vertically */
+    font-weight: bold;
+    line-height: 1; 
 }
 
 .my-bids-button:hover {
-    background-color: #000000; /* Black background on hover */
-    color: #FAF9F6; /* White text on hover */
+    background-color: #000000; 
+    color: #FAF9F6;
 }
 
 
@@ -162,12 +161,12 @@
         const currentBidValue = document.getElementById("currentBid");
         const extraBidAmountElement = document.getElementById("extraBidAmount");
 
-        // Get itemid and current bid value from URL parameters
+     
         const urlParams = new URLSearchParams(window.location.search);
         const itemid = urlParams.get("itemid");
         let currentBid = parseFloat(urlParams.get("currentbid"));
 
-        // Set current bid value in the HTML
+  
         currentBidValue.innerText = currentBid.toLocaleString("en-IN");
 
         raiseBidButton.addEventListener("click", function () {
@@ -175,14 +174,13 @@
 
             if (!isNaN(newBidAmount) && newBidAmount > currentBid) {
                 const extraBidAmount = newBidAmount - currentBid;
-                currentBid = newBidAmount; // Update the current bid value
+                currentBid = newBidAmount; 
                 currentBidValue.innerText = newBidAmount.toLocaleString("en-IN");
                 bidInput.value = "";
 
-                // Update the extra bid amount next to the green arrow
                 extraBidAmountElement.innerText = `+${extraBidAmount.toLocaleString('en-IN')}`;
 
-                // Send a PATCH request using Axios
+           
                 axios.patch("http://localhost:3000/api/item/updateItem", {
                     itemid: itemid.toString(),
                     basePrice: currentBid.toFixed(2)

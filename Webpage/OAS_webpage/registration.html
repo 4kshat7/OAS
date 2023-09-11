@@ -105,11 +105,7 @@
             box-shadow: 0 4px 8px 0 rgba(0, 208, 139, 0.2), 0 6px 20px 0 rgba(0, 208, 139, 0.19);
         }
 
-        /* .btns{
-            width: 70%;
-            display: flex;
-            justify-content: space-between;
-        } */
+
         input[type=submit],
         input[type=reset] {
             background-color: var(--col);
@@ -119,7 +115,7 @@
             font-size: 1.2rem;
             letter-spacing: 1px;
             margin-top: 1.2rem;
-            /* width: 21%; */
+          
         }
     </style>
 </head>
@@ -142,19 +138,15 @@
             <form name="regfrm" action="reg_db.php" onsubmit="return validateForm()" method="post">
 
                 
-                <!-- Full Name Input -->
+       
                 <input type="text" name="fullname" placeholder="Enter Full Name"><br>
 
-                <!-- Email Input -->
                 <input type="email" name="email" placeholder="Enter Email"><br>
 
-                <!-- Password Input -->
                 <input type="password" name="pass" placeholder="Password"><br>
 
-                <!-- Confirm Password Input -->
                 <input type="password" name="cpassword" placeholder="Re-Enter Password"><br>
 
-                <!-- Submit and Reset Buttons -->
                 <input type="submit" name="submit">
                 <input type="reset" name="reset">
             </form>
@@ -195,27 +187,21 @@
                 return false;
             }
     
-            // Create an object with the form data
             const userData = {
                 name: fullName,
                 email: email,
                 pass: pass
             };
     
-            // Make a POST request using Axios
             axios.post('http://localhost:3000/api/user/insertuser', userData)
                 .then(function (response) {
-                    // Handle the registration success here
+          
                     console.log("Registration successful:", response.data);
     
-                    // Redirect to userLogin.html
                     window.location.href = 'userLogin.html';
                 })
                 .catch(function (error) {
-                    // Handle registration errors here
                     console.error("Registration failed:", error);
-    
-                    // Display an error message to the user if needed
                     alert("Registration failed. Please try again.");
                 });
         }
